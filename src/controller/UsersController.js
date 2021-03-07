@@ -1,6 +1,3 @@
-const db = require('../../db')
-const jwt = require('jsonwebtoken');
-const bcrypt = require('bcrypt');
 const AuthService = require('../services/AuthService')
 require('dotenv').config()
 
