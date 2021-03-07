@@ -8,7 +8,6 @@ app.use(express.json());
 
 app.use('/users', users);
 
-
 app.listen(PORT);
 
 console.log('Running at Port 3000');
