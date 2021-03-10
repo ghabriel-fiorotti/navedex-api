@@ -10,5 +10,10 @@ exports.naverData = async(req, res) => {
     const response = await NaversService.naverData(req.params.id);
     return res.json(response, response.status_code);
 }
+
+exports.store = async(req, res) => {
+    const response = await NaversService.store(req.body)
+    return res.json(response, response.status_code);
+}
  
 

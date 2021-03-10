@@ -33,14 +33,30 @@ module.exports = {
         }
     },
     naverData: async (id)  => {
-        //TERMINAR PARTE DO INNER JOIN COM PROJECTS
         try {
-            const response = await NaversRepository.naverData(id);4
+            const responseNaversId = await NaversRepository.naverDataId(id);
+            const responseProjectsNaveriD = await NaversRepository.projectDataNaverId(id)
+
+            responseNaversId[0]["projects"] = responseProjectsNaveriD;
             
-            if (response.length === 0) {
+            function formatDate(date) {
+                let actualDate = new Date(date);
+                console.log(actualDate)
+                const actualYear = actualDate.getFullYear();
+                let actualMonth = actualDate.getMonth()+1;
+                let actualDay = actualDate.getDate();
+                actualMonth = actualMonth < 10 ? "0"+actualMonth : actualMonth
+                actualDay = actualDay < 10 ? "0" + actualDay : actualDay
+
+                return `${actualYear}-${actualMonth}-${actualDay}`
+            } 
+            responseNaversId[0]["birthdate"] = formatDate(responseNaversId[0]["birthdate"])
+            responseNaversId[0]["admission_date"] = formatDate(responseNaversId[0]["admission_date"])
+
+            if (responseNaversId.length === 0) {
                 return { "message": "Nenhum resultado encontrado", "status_code": 200 }
             } else {
-                return { "message": "Busca realizada com sucesso", "response": response, "status_code": 200}
+                return { "message": "Busca realizada com sucesso", "response":responseNaversId, "status_code": 200}
             }
 
         } catch (error) {
