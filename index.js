@@ -7,7 +7,6 @@ const projects = require('./src/routes/projects');
 
 app.use(express.json());
 
-
 app.use('/users', users);
 app.use('/navers', navers);
 app.use('/projects', projects);

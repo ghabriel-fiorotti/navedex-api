@@ -11,18 +11,18 @@ exports.projectsData = async (req, res) => {
     return res.json(response, response.status_code);
 }
 
-exports.store = async(req, res) => {
+exports.store = async (req, res) => {
     const response = await ProjectsService.store(req.body, req.query)
     console.log(req.query)
     return res.json(response, response.status_code);
 }
 
-exports.update = async(req, res) => {
+exports.update = async (req, res) => {
     const response = await ProjectsService.update(req.body, req.query)
     return res.status(response.status_code).json(response);
 }
 
-exports.delete = async(req, res) => {
+exports.delete = async (req, res) => {
     const response = await ProjectsService.delete(req.query);
     return res.status(response.status_code).json(response);
 }

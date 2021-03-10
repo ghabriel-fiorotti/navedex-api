@@ -11,7 +11,7 @@ module.exports = {
     },
     naversListByFilter: async (data) => {
         try {
-            const response = await db('navers').where({'naver_name': data.naverName || null}).orWhere({'job_role' :data.job || null}).orWhere('admission_date', '<=', data.companyTime)
+            const response = await db('navers').where({ 'naver_name': data.naverName || null }).orWhere({ 'job_role': data.job || null }).orWhere('admission_date', '<=', data.companyTime)
             return response;
         } catch (error) {
             return error;
@@ -21,7 +21,7 @@ module.exports = {
 
     naverDataId: async (id) => {
         try {
-            
+
             const responseNavers = await db('navers').select('id', 'naver_name', 'birthdate', 'admission_date', 'job_role').where('id', id)
             return responseNavers;
         } catch (error) {
@@ -78,7 +78,7 @@ module.exports = {
             return error;
         }
     },
-    deleteNavers : async (params) => {
+    deleteNavers: async (params) => {
         try {
             const response = await db('navers').where({ 'id': params.idNaver, "users_id": params.idUser }).del();
             return response;

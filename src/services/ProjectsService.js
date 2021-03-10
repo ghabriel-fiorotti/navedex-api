@@ -26,11 +26,11 @@ module.exports = {
             return { "message": "Erro no banco de dados", "status_code": 422 }
         }
     },
-    projectsData : async (id) => {
+    projectsData: async (id) => {
         try {
             const responseprojectsId = await ProjectsRepository.projectDataId(id);
             const responseNaversProjectsId = await ProjectsRepository.naversProjectsId(id)
-            
+
             function formatDate(date) {
                 let actualDate = new Date(date);
                 console.log(actualDate)
@@ -58,9 +58,9 @@ module.exports = {
     },
     store: async (data, idUser) => {
         try {
-            const responseInsertProjects = await ProjectsRepository.insertProjects(data, idUser );
+            const responseInsertProjects = await ProjectsRepository.insertProjects(data, idUser);
             for (let index = 0; index < (data.navers).length; index++) {
-                let responseInsertProjectsNavers = await ProjectsRepository.insertNaversProjects( responseInsertProjects[0], data.navers[index],);
+                let responseInsertProjectsNavers = await ProjectsRepository.insertNaversProjects(responseInsertProjects[0], data.navers[index],);
             }
             return { "message": "Naver inserido com sucesso", "response": data, "status_code": 201 }
         } catch (error) {
@@ -69,18 +69,18 @@ module.exports = {
     },
     update: async (data, params) => {
         try {
-            const responseUpdateProjects = await ProjectsRepository.updateProjects(data, params );
+            const responseUpdateProjects = await ProjectsRepository.updateProjects(data, params);
             const responseDeleteProjectsNavers = await ProjectsRepository.deleteNaversProjects(params)
 
             for (let index = 0; index < (data.navers).length; index++) {
-                await ProjectsRepository.insertNaversProjects( responseUpdateProjects[0], data.navers[index],);
+                await ProjectsRepository.insertNaversProjects(responseUpdateProjects[0], data.navers[index],);
             }
             return { "message": "Projeto atualizado com sucesso", "response": data, "status_code": 201 }
         } catch (error) {
             return { "message": "Erro no banco de dados", "status_code": 422 }
         }
     },
-    delete : async(params) => {
+    delete: async (params) => {
         try {
             const responseDeleteProjects = await ProjectsRepository.deleteProjects(params);
             const responseDeleteProjectsNavers = await ProjectsRepository.deleteNaversProjects(params);
@@ -88,6 +88,6 @@ module.exports = {
         } catch (error) {
             return { "message": "Erro no banco de dados", "status_code": 422, error }
         }
-    } 
+    }
 }
 

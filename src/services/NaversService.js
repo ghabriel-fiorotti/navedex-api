@@ -6,8 +6,8 @@ require('dotenv').config()
 module.exports = {
     naversList: async (data) => {
         let response;
-        
-        if(data.companyTime) data.companyTime = teste(data.companyTime)
+
+        if (data.companyTime) data.companyTime = teste(data.companyTime)
 
         try {
             if (Object.keys(data).length === 0) {
@@ -15,7 +15,7 @@ module.exports = {
             } else {
                 response = await NaversRepository.naversListByFilter(data);
             }
-            
+
             if (response.length === 0) {
                 return { "message": "Nenhum resultado encontrado", "status_code": 200 }
             }
@@ -67,7 +67,7 @@ module.exports = {
             const responseUpdateNavers = await NaversRepository.updateNavers(data, params)
             const responseDeleteProjectsNavers = await NaversRepository.deleteProjectsNavers(params)
 
-            for(var index in data.projects){
+            for (var index in data.projects) {
                 await NaversRepository.insertProjectsNavers(data.projects[index], params.idNaver);
             }
 
@@ -77,7 +77,7 @@ module.exports = {
         }
     },
 
-    delete : async(params) => {
+    delete: async (params) => {
         try {
             const responseDeleteNavers = await NaversRepository.deleteNavers(params);
             const responseDeleteProjectsNavers = await NaversRepository.deleteProjectsNavers(params);
@@ -100,11 +100,11 @@ function formatDate(date) {
     return `${actualYear}-${actualMonth}-${actualDay}`
 }
 
-function teste(data){
+function teste(data) {
     let currentDate = new Date();
     const admissionYear = parseInt(currentDate.getFullYear()) - data;
-    const currentMonth = (currentDate.getMonth()+1).toString();
+    const currentMonth = (currentDate.getMonth() + 1).toString();
     const currentDay = currentDate.getDate().toString();
-    yearAdmission = admissionYear.toString().concat('-',currentMonth,'-',currentDay); 
+    yearAdmission = admissionYear.toString().concat('-', currentMonth, '-', currentDay);
     return yearAdmission
 }
