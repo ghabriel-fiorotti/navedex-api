@@ -15,5 +15,15 @@ exports.store = async(req, res) => {
     const response = await NaversService.store(req.body, req.query.id)
     return res.json(response, response.status_code);
 }
+
+exports.update = async(req, res) => {
+    const response = await NaversService.update(req.body, req.query)
+    return res.status(response.status_code).json(response);
+}
+
+exports.delete = async(req, res) => {
+    const response = await NaversService.delete(req.query);
+    return res.status(response.status_code).json(response);
+}
  
 
