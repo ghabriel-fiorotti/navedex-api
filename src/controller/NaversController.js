@@ -12,7 +12,7 @@ exports.naverData = async(req, res) => {
 }
 
 exports.store = async(req, res) => {
-    const response = await NaversService.store(req.body)
+    const response = await NaversService.store(req.body, req.query.id)
     return res.json(response, response.status_code);
 }
  

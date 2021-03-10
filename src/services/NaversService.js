@@ -37,6 +37,7 @@ module.exports = {
             const responseNaversId = await NaversRepository.naverDataId(id);
             const responseProjectsNaveriD = await NaversRepository.projectDataNaverId(id)
 
+
             responseNaversId[0]["projects"] = responseProjectsNaveriD;
             
             function formatDate(date) {
@@ -59,6 +60,17 @@ module.exports = {
                 return { "message": "Busca realizada com sucesso", "response":responseNaversId, "status_code": 200}
             }
 
+        } catch (error) {
+            return { "message": "Erro no banco de dados", "status_code": 422 }
+        }
+    },
+    store : async (data, id) => {
+        try {
+            const responseInsertNavers = await NaversRepository.insertNavers(data, id);
+            for (let index = 0; index < (data.projects).length; index++) {
+                let responseInsertProjectsNavers = await NaversRepository.insertProjectsNavers(data.projects[index], responseInsertNavers[0]);
+            }
+            return { "message": "Naver inserido com sucesso", "response":data, "status_code": 201}
         } catch (error) {
             return { "message": "Erro no banco de dados", "status_code": 422 }
         }

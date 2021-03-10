@@ -29,12 +29,34 @@ module.exports = {
     },
     projectDataNaverId : async(id) => {
         try {
-            const responseProjects = await db('projects').select('projects.id', 'project_name').where('navers_id', id)
+
+            const responseProjects = await db('projects')
+            .join('projects_navers', 'navers_id', '=', 'projects.id')
+            .select('projects.id', 'projects.project_name')
+            .where('projects_navers.navers_id', id)
+            console.log(responseProjects)
+
             return responseProjects;
         } catch (error) {
             return error;
         }
         
+    },
+    insertNavers : async (data, users_id) => {
+        try {
+            const {naver_name, birthdate, admission_date, job_role} = data;
+            const response = await db('navers').insert({naver_name, birthdate, admission_date, job_role, users_id});
+            return response;
+        } catch (error) {
+            return error;
+        }
+    },
+    insertProjectsNavers : async (projectsId, naversId) =>{
+        try {
+            const response = await db('projects_navers').insert(projectsId, naversId);
+            return response;
+        } catch (error) {
+            return error;
+        }
     }
-
 }
