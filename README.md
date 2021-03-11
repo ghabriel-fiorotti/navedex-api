@@ -37,3 +37,5 @@ Utilize o comando abaixo para inicializar o servidor express
 ```bash
 npm start
 ```
+
+A documentação de rotas, se encontra na collection do POSTMAN disponibilizada neste repositório
