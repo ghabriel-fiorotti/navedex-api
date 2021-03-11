@@ -7,7 +7,7 @@ module.exports = {
     naversList: async (data) => {
         let response;
 
-        if (data.companyTime) data.companyTime = teste(data.companyTime)
+        if (data.companyTime) data.companyTime = DiffAdmission(data.companyTime)
 
         try {
             if (Object.keys(data).length === 0) {
@@ -100,7 +100,7 @@ function formatDate(date) {
     return `${actualYear}-${actualMonth}-${actualDay}`
 }
 
-function teste(data) {
+function DiffAdmission(data) {
     let currentDate = new Date();
     const admissionYear = parseInt(currentDate.getFullYear()) - data;
     const currentMonth = (currentDate.getMonth() + 1).toString();

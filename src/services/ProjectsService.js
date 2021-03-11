@@ -9,7 +9,6 @@ module.exports = {
         let response;
 
         try {
-            console.log(data)
             if (Object.keys(data).length === 0) {
                 response = await ProjectsRepository.projectsListAll();
             } else {
@@ -33,7 +32,6 @@ module.exports = {
 
             function formatDate(date) {
                 let actualDate = new Date(date);
-                console.log(actualDate)
                 const actualYear = actualDate.getFullYear();
                 let actualMonth = actualDate.getMonth() + 1;
                 let actualDay = actualDate.getDate();

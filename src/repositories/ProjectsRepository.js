@@ -40,7 +40,7 @@ module.exports = {
     },
     insertProjects: async (data, userId) => {
         try {
-            const response = await db('projects').insert({ "project_name": data.name, "users_id": userId.id });
+            const response = await db('projects').insert({ "project_name": data.name, "users_id": userId.userId });
             return response;
         } catch (error) {
             return error;
@@ -49,7 +49,6 @@ module.exports = {
     insertNaversProjects: async (projectsId, naversId) => {
         try {
             const response = await db('projects_navers').insert({ "projects_id": projectsId, "navers_id": naversId });
-            console.log(response)
             return response
         } catch (error) {
             return error
@@ -58,7 +57,6 @@ module.exports = {
     updateProjects: async (data, params) => {
         try {
             const response = await db('projects').where({ 'id': params.idProject, "users_id": params.idUser }).update({ "project_name": data.name });
-            console.log(response)
             return response
         } catch (error) {
             return `${error}`

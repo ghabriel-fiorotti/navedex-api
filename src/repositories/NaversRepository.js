@@ -34,7 +34,6 @@ module.exports = {
                 .join('projects_navers', 'projects_navers.projects_id', '=', 'projects.id')
                 .select('projects.id', 'projects.project_name')
                 .where('projects_navers.navers_id', id)
-            console.log(responseProjects)
 
             return responseProjects;
         } catch (error) {
