@@ -71,7 +71,7 @@ module.exports = {
                 await NaversRepository.insertProjectsNavers(data.projects[index], params.idNaver);
             }
 
-            return { "message": "Naver atualizado com sucesso", "status_code": 200 }
+            return { "message": "Naver atualizado com sucesso", "response" : data, "status_code": 200 }
         } catch (error) {
             return { "message": "Erro no banco de dados", "status_code": 422, error }
         }
